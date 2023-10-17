@@ -304,3 +304,162 @@ class OrdenService implements IOrdenService {
     }
 }
 ```
+
+## Biblioteca (baja cohesion)
+
+
+```java
+public class Biblioteca {
+    public void agregarLibro(Libro libro) {
+        // Lógica para agregar un libro a la biblioteca
+    }
+
+    public void eliminarLibro(String ISBN) {
+        // Lógica para eliminar un libro de la biblioteca por ISBN
+    }
+
+    public void buscarPorAutor(String autor) {
+        // Lógica para buscar libros por autor
+    }
+
+    public void generarInforme() {
+        // Lógica para generar un informe de la biblioteca
+    }
+
+    public void asignarPrestamo(int id, String lector){
+
+    }
+
+    public void marcaLibroComoCompletado(int id){
+
+    }
+    
+    // Otros métodos no relacionados
+}
+
+public class BajaCohesion {
+    public static void main(String[] args) {
+        Biblioteca biblioteca = new Biblioteca();
+        
+        // Agregar libros
+        biblioteca.agregarLibro(new Libro("El Quijote", "Miguel de Cervantes"));
+        
+        // Marcar un libro como completado
+        biblioteca.marcarLibroComoCompletada(1);
+        
+        // Asignar un responsable a una tarea
+        biblioteca.asignarPrestamo(1, "Lector");
+        
+        // Generar un informe de la biblioteca
+        biblioteca.generarInforme();
+    }
+}
+
+```
+
+
+## Biblioteca (Alta cohesión)
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Biblioteca  {
+    public static void main(String[] args) {
+        List<Libro> biblioteca = new ArrayList<>();
+
+        // Crear un gestor común para el repositorio de libros
+        GestorLibros gestorLibros = new GestorLibros(biblioteca);
+        BuscadorLibros buscador = new BuscadorLibros(biblioteca);
+        GeneradorInformes generador = new GeneradorInformes(biblioteca);
+
+        // Agregar libros
+        gestorLibros.agregarLibro(new Libro("El Quijote", "Miguel de Cervantes"));
+        gestorLibros.agregarLibro(new Libro("Hamlet", "William Shakespeare"));
+        gestorLibros.agregarLibro(new Libro("Romeo & Julieta", "William Shakespeare"));
+
+        // Buscar libros por autor
+        List<Libro> librosShakespeare = buscador.buscarPorAutor("William Shakespeare");
+        System.out.println("Libros de William Shakespeare:");
+        for (Libro libro : librosShakespeare) {
+            System.out.println(libro.getTitulo());
+        }
+
+        // Generar un informe de la biblioteca
+        generador.generarInforme();
+    }
+}
+
+class GestorLibros {
+    private List<Libro> libros;
+
+    public GestorLibros(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public void agregarLibro(Libro libro) {
+        libros.add(libro);
+        // Lógica para agregar un libro a la biblioteca
+    }
+
+    public void eliminarLibro(String ISBN) {
+        // Lógica para eliminar un libro de la biblioteca por ISBN
+    }
+}
+
+class BuscadorLibros {
+    private List<Libro> libros;
+
+    public BuscadorLibros(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public List<Libro> buscarPorAutor(String autor) {
+        // Lógica para buscar libros por autor
+        return libros.stream()
+                .filter(libro -> libro.getAutor().equals(autor))
+                .collect(Collectors.toList());
+    }
+}
+
+class GeneradorInformes {
+    private List<Libro> libros;
+
+    public GeneradorInformes(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    public void generarInforme() {
+        // Lógica para generar un informe de la biblioteca
+    }
+}
+
+class Libro{
+
+    public Libro(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+
+
+    private String titulo;
+
+    public String getAutor() {
+        return autor;
+    }
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+    private String autor;
+
+}
+```
