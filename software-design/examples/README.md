@@ -76,3 +76,231 @@ public interface UserRepository {
 ```
 
 Este ejemplo demuestra cómo se aplican los patrones Controller e Information Expert en Java. El controlador `UserController` coordina la acción de registrar usuarios y utiliza el Information Expert, que es la clase `User`, para manipular los datos del usuario. El servicio de usuarios y el repositorio también son ejemplos de capas intermedias que podrían utilizarse en un sistema más complejo.
+
+
+## TiendaEnLinea (High coupled)
+
+```java
+public class TiendaEnLinea {
+    private List<Producto> inventario = new ArrayList<>();
+    private List<Orden> ordenes = new ArrayList<>();
+
+    public void agregarProducto(Producto producto) {
+        inventario.add(producto);
+    }
+
+    public void realizarOrden(Cliente cliente, List<Producto> productos) {
+        Orden orden = new Orden(cliente, productos);
+        ordenes.add(orden);
+        for (Producto producto : productos) {
+            if (inventario.contains(producto)) {
+                inventario.remove(producto);
+            }
+        }
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenes;
+    }
+}
+
+public class Cliente {
+    private String nombre;
+    private String correo;
+
+    public Cliente(String nombre, String correo) {
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+}
+
+public class Producto {
+    private String nombre;
+    private double precio;
+
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+}
+
+public class Orden {
+    private Cliente cliente;
+    private List<Producto> productos;
+
+    public Orden(Cliente cliente, List<Producto> productos) {
+        this.cliente = cliente;
+        this.productos = productos;
+    }
+}
+```
+
+## TiendaEnLinea (low coupling)
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class TiendaEnLinea {
+    private Inventario inventario;
+    private OrdenService ordenService;
+
+    public TiendaEnLinea(Inventario inventario, OrdenService ordenService) {
+        this.inventario = inventario;
+        this.ordenService = ordenService;
+    }
+
+    public void agregarProducto(Producto producto) {
+        inventario.agregarProducto(producto);
+    }
+
+    public void realizarOrden(Cliente cliente, List<Producto> productos) {
+        Orden orden = new Orden(cliente, productos);
+        ordenService.procesarOrden(orden);
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenService.obtenerOrdenes();
+    }
+}
+
+class Cliente {
+    private String nombre;
+    private String correo;
+
+    public Cliente(String nombre, String correo) {
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+}
+
+class Producto {
+    private String nombre;
+    private double precio;
+
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+}
+
+class Orden {
+    private Cliente cliente;
+    private List<Producto> productos;
+
+    public Orden(Cliente cliente, List<Producto> productos) {
+        this.cliente = cliente;
+        this.productos = productos;
+    }
+}
+
+class Inventario {
+    private List<Producto> productos = new ArrayList<>();
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+}
+
+class OrdenService {
+    private List<Orden> ordenes = new ArrayList<>();
+
+    public void procesarOrden(Orden orden) {
+        ordenes.add(orden);
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenes;
+    }
+}
+
+```
+
+## TiendaEnLinea (super low coupling) `interfaces`
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class TiendaEnLinea {
+    private IInventario inventario;
+    private IOrdenService ordenService;
+
+    public TiendaEnLinea(IInventario inventario, IOrdenService ordenService) {
+        this.inventario = inventario;
+        this.ordenService = ordenService;
+    }
+
+    public void agregarProducto(Producto producto) {
+        inventario.agregarProducto(producto);
+    }
+
+    public void realizarOrden(Cliente cliente, List<Producto> productos) {
+        Orden orden = new Orden(cliente, productos);
+        ordenService.procesarOrden(orden);
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenService.obtenerOrdenes();
+    }
+}
+
+interface IInventario {
+    void agregarProducto(Producto producto);
+}
+
+interface IOrdenService {
+    void procesarOrden(Orden orden);
+    List<Orden> obtenerOrdenes();
+}
+
+class Cliente {
+    private String nombre;
+    private String correo;
+
+    public Cliente(String nombre, String correo) {
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+}
+
+class Producto {
+    private String nombre;
+    private double precio;
+
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+}
+
+class Orden {
+    private Cliente cliente;
+    private List<Producto> productos;
+
+    public Orden(Cliente cliente, List<Producto> productos) {
+        this.cliente = cliente;
+        this.productos = productos;
+    }
+}
+
+class Inventario implements IInventario {
+    private List<Producto> productos = new ArrayList<>();
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+}
+
+class OrdenService implements IOrdenService {
+    private List<Orden> ordenes = new ArrayList<>();
+
+    public void procesarOrden(Orden orden) {
+        ordenes.add(orden);
+    }
+
+    public List<Orden> obtenerOrdenes() {
+        return ordenes;
+    }
+}
+```
