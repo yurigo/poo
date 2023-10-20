@@ -1,0 +1,3 @@
+# HOTEL TRIVAGO
+
+Un sistema de reservas de hoteles permite a los clientes buscar y reservar habitaciones en varios hoteles. Cada hotel tiene un nombre, una dirección, un número de teléfono, y una clasificación en estrellas que indica su nivel de lujo. Cada habitación en un hotel tiene un número de habitación, una tarifa por noche, una capacidad máxima de personas y una vista que puede ser al mar, a la montaña o estándar. Los clientes que utilizan el sistema deben registrarse con un nombre de usuario, una dirección de correo electrónico y una contraseña. Además, pueden agregar detalles personales como nombre, dirección, número de teléfono y preferencias de habitación. Las reservas de habitaciones se realizan con una fecha de entrada y una fecha de salida

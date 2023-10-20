@@ -1,0 +1,9 @@
+# ALEJANDRIA
+
+Una biblioteca digital necesita un sistema de gestión de biblioteca para mantener un registro de libros, autores, usuarios y préstamos. El sistema de gestión de biblioteca permitirá a los usuarios buscar, prestar y devolver libros, y llevar un seguimiento del historial de préstamos
+
+Dentro de este sistema, encontramos diversos elementos clave. Los libros, por ejemplo, tienen detalles como el título, el autor, el ISBN, género, año de publicación y su disponibilidad para préstamo. Los autores, por otro lado, se caracterizan por información como el nombre, la biografía y la nacionalidad. Los usuarios registrados en la biblioteca cuentan con perfiles que incluyen su nombre, un número único de identificación y un historial de préstamos. Cada transacción de préstamo se registra con la fecha de inicio, la fecha de devolución prevista y el estado del libro prestado. Además, cada biblioteca en el sistema posee datos como el nombre, la dirección y la información de contacto.
+
+Los usuarios tienen la capacidad de buscar libros en función de diferentes criterios, como el título, el autor o el género, lo que simplifica la ubicación de libros de su interés. También pueden solicitar préstamos de libros disponibles. El sistema gestiona de cerca todos los préstamos y sus fechas de devolución previstas. En caso de retrasos, se aplican sanciones como incentivo para que los usuarios cumplan con los plazos.
+
+Con el fin de asegurar la eficiencia, el sistema tiene la capacidad de generar informes relacionados con la disponibilidad de libros y los préstamos vencidos. También administra la base de datos de libros y usuarios, garantizando la integridad de la información. Adicionalmente, el sistema notifica a los usuarios sobre las fechas de devolución próximas, brindando un servicio proactivo.
