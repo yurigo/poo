@@ -405,6 +405,9 @@ class GestorLibros {
 
     public void eliminarLibro(String ISBN) {
         // Lógica para eliminar un libro de la biblioteca por ISBN
+        // buscar el libro por el string
+        // borrarlo de la lista
+        // libros.remove()
     }
 }
 
@@ -441,6 +444,8 @@ class Libro{
         this.titulo = titulo;
         this.autor = autor;
     }
+
+    private String titulo;
     public String getTitulo() {
         return titulo;
     }
@@ -449,17 +454,13 @@ class Libro{
         this.titulo = titulo;
     }
 
-
-
-    private String titulo;
-
+    private String autor;
     public String getAutor() {
         return autor;
     }
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    private String autor;
 
 }
 ```
