@@ -3,13 +3,13 @@
 ## GRASP
 > General Responsibility Assignment Software ~~Patterns~~ Principles
 
-Conjunto de buenas prácticas de recomendables durante el diseño del software.
+Conjunto de buenas prácticas recomendables durante el diseño del software.
 
-- [ ] Experto en información
+- [x] Experto en información
 - [ ] Creador
-- [ ] Controlador
-- [ ] Alta cohesión
-- [ ] Bajo acoplamiento
+- [x] Controlador
+- [x] Alta cohesión
+- [x] Bajo acoplamiento
 - [ ] Polimorfismo
 - [ ] Fabricación pura
 - [ ] Indirección
