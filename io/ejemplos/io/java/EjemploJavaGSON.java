@@ -30,6 +30,8 @@ public class Main {
         File jsonfile = new File(filepath);
         try {
             FileReader fileReader = new FileReader(jsonfile);
+
+            // Doc util: https://www.baeldung.com/gson-json-to-map
             Map<Integer, User> usuarios = gson.fromJson(fileReader , new TypeToken<Map<Integer, User>>() {}.getType());
             
             System.out.println(usuarios.get(2).getLogin());
