@@ -1,0 +1,29 @@
+{
+    "nombre": "AAAAA",
+    "descripcion": "BBBBBB",
+    "personas": [
+      {
+        "nombre": "Yuri",
+        "edad": 40282,
+        "id": 1,
+        "medicamentos": [
+          {
+            "nombre": "Paracetamol",
+            "dosis": 1000,
+            "frecuencia": 8
+          },
+          {
+            "nombre": "Ibuprofeno",
+            "dosis": 600,
+            "frecuencia": 8
+          }
+        ]
+      },
+      {
+        "nombre": "John",
+        "edad": 30,
+        "id": 2,
+        "medicamentos": []
+      }
+    ]
+  }
